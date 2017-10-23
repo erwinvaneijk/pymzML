@@ -1,3 +1,8 @@
+############
+Build status
+############
+
+[![Build Status](https://travis-ci.org/erwinvaneijk/pymzML.svg?branch=v2.0.0)](https://travis-ci.org/erwinvaneijk/pymzML)
 
 ############
 Introduction
@@ -61,7 +66,7 @@ Implementation
 
 pymzML requires Python3.4+.
 The module is freely available on pymzml.github.com or pypi,
-published under GPL and requires no additional modules to be installed, but can 
+published under GPL and requires no additional modules to be installed, but can
 optionally use numpy.
 
 
@@ -95,7 +100,7 @@ pymzML requires `Python`_ 3.4 or higher.
 
 .. note::
 
-    Consider to use a Python virtual environment for easy installation and use. 
+    Consider to use a Python virtual environment for easy installation and use.
     Further, usage of python3.4+ is recommended.
 
 
