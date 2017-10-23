@@ -1,3 +1,6 @@
+### STATUS
+
+[![Build Status](https://travis-ci.org/erwinvaneijk/pymzML.svg?branch=master)](https://travis-ci.org/erwinvaneijk/pymzML)
 ### INTRODUCTION
 
 Python module to interface mzML data in Python based on cElementTree
