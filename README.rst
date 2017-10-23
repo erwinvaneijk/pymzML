@@ -2,7 +2,7 @@
 Build status
 ############
 
-[![Build Status](https://travis-ci.org/erwinvaneijk/pymzML.svg?branch=v2.0.0)](https://travis-ci.org/erwinvaneijk/pymzML)
+[![Build Status](https://travis-ci.org/erwinvaneijk/pymzML.svg?branch=v2.0.1-rc1)](https://travis-ci.org/erwinvaneijk/pymzML)
 
 ############
 Introduction
