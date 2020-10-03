@@ -1,15 +1,32 @@
-############
-Build status
-############
-
-.. image:: https://travis-ci.org/erwinvaneijk/pymzML.svg?branch=v2.0.1-rc1
-    :target: https://travis-ci.org/erwinvaneijk/pymzML
 
 ############
 Introduction
 ############
 
-The latest Documentation was generated on: |today|
+.. image:: https://travis-ci.org/pymzml/pymzML.svg?branch=master
+    :target: https://travis-ci.org/pymzml/pymzML
+
+.. image:: https://ci.appveyor.com/api/projects/status/e5reb5xw74jfqk2v/branch/dev?svg=true
+   :target: https://ci.appveyor.com/api/projects/status/e5reb5xw74jfqk2v/branch/dev?svg=true
+   :alt: AppVeyor CI status
+
+.. image:: https://readthedocs.org/projects/pymzml/badge/?version=latest
+    :target: http://pymzml.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
+.. image:: https://codecov.io/gh/pymzml/pymzml/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/pymzml/pymzml
+    :alt: Code Coverage
+
+.. image:: https://img.shields.io/pypi/v/pymzML.svg
+   :target: https://pypi.org/project/pymzML/
+
+.. image:: https://pepy.tech/badge/pymzml
+   :target: https://pepy.tech/project/pymzml
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+   :alt: As long it is black
 
 
 *******************
@@ -18,12 +35,12 @@ General information
 
 Module to parse mzML data in Python based on cElementTree
 
-Copyright 2010-2017 by:
+Copyright 2010-2018 by:
 
     | M. Kösters,
     | J. Leufken,
-    | Bald, Till
-    | Niehues, Anna
+    | T. Bald,
+    | A. Niehues,
     | S. Schulze,
     | K. Sugimoto,
     | R.P. Zahedi,
@@ -40,14 +57,15 @@ Contact information
 Please refer to:
 
     | Dr. Christian Fufezan
-    | Institute of Plant Biology and Biotechnology
-    | Schlossplatz 8 , R 105
-    | University of Muenster
+    | Group Leader Experimental Bioinformatics
+    | Cellzome GmbH
+    | R&D Platform Technology & Science
+    | GSK
     | Germany
     | eMail: christian@fufezan.net
     | Tel: +049 251 83 24861
     |
-    | http://www.uni-muenster.de/Biologie.IBBP.AGFufezan
+    | https://fufezan.net
 
 
 *******
@@ -65,10 +83,9 @@ pymzML is an extension to Python that offers
 Implementation
 **************
 
-pymzML requires Python3.4+.
+pymzML requires Python3.5+.
 The module is freely available on pymzml.github.com or pypi,
-published under GPL and requires no additional modules to be installed, but can
-optionally use numpy.
+published under MIT license and only requires numpy and regex, however there are several optional dependencies for extended functionality like interactive plotting and deconvolution.
 
 
 ********
@@ -90,14 +107,15 @@ The complete Documentation can be found as pdf
 Citation
 ********
 
-To be anounced
+M Kösters, J Leufken, S Schulze, K Sugimoto, J Klein, R P Zahedi, M Hippler, S A Leidel, C Fufezan; pymzML v2.0: introducing a highly compressed and seekable gzip format, Bioinformatics,
+doi: https://doi.org/10.1093/bioinformatics/bty046
 
 
 ************
 Installation
 ************
 
-pymzML requires `Python`_ 3.4 or higher.
+pymzML requires `Python`_ 3.5 or higher.
 
 .. note::
 
@@ -105,7 +123,7 @@ pymzML requires `Python`_ 3.4 or higher.
     Further, usage of python3.4+ is recommended.
 
 
-Download pzmzML using `GitHub`_ **or** the zip file:
+Download pymzML using `GitHub`_ **or** the zip file:
 
 * GitHub version: Start by cloning the GitHub repository::
 
@@ -120,9 +138,41 @@ Download pzmzML using `GitHub`_ **or** the zip file:
 .. _GitHub:
    https://github.com/pymzML/pymzml
 
+* pypi version::
+
+   user@localhost:~$ pip install pymzml # install standard version
+   user@localhost:~$ pip install "pymzml[plot]" # with plotting support
+   user@localhost:~$ pip install "pymzml[pynumpress]" # with pynumpress support
+   user@localhost:~$ pip install "pymzml[deconvolution]" # with deconvolution support using ms_deisotope
+   user@localhost:~$ pip install "pymzml[full]" # full featured
+
+
+If you have troubles installing the dependencies, install numpy first separately,
+since pynumpress requires numpy to be installed.
 
 If you use Windows 7 please use the 'SDK7.1 command prompt' for installation
 of pymzML to assure correct compiling of the C extensions.
 
+=======
+Testing
+=======
+
+To test the package and correct installation::
+
+    tox
 
 
+*************
+Contributing
+*************
+
+Please read the contribution guidelines before contributing `here </CONTRIBUTING.rst>`_
+
+
+****************
+Code of Conduct
+****************
+
+Since pymzML is an open source project maintained by the community, we established a code of conduct
+in order to facilitate an inclusive environment for all users, contributors and project memebers.
+Before contributing to pymzML, please read the code of conduct `here </CODE_OF_CONDUCT.md>`_

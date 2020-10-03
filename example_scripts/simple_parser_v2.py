@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import sys
 import pymzml
+from collections import defaultdict as ddict
 
 
 def main(mzml_file):
-    '''
+    """
     Basic example script to demonstrate the usage of pymzML. Requires a mzML
     file as first argument.
 
@@ -17,27 +18,23 @@ def main(mzml_file):
         key (Spectrum['ms level']). The current syntax can be found in
         simple_parser.py
 
-    '''
+    """
     run = pymzml.run.Reader(mzml_file)
     # print( run[10000].keys() )
-    for n, spec in enumerate( run ):
+    stats = ddict(int)
+    for n, spec in enumerate(run):
         print(
-            'Spectrum {0}, MS level {ms_level}'.format(
-                n,
-                ms_level = spec['ms level']
-            ),
-            end = '\r'
+            "Spectrum {0}, MS level {ms_level}".format(n, ms_level=spec["ms level"]),
+            end="\r",
         )
-    print(
-        'Parsed {0} spectra from file {1}'.format(
-            n,
-            mzml_file
-        )
-    )
+        # the old method to obtain peaks from the Spectrum class
+        stats[spec.ID] = len(spec.centroidedPeaks)
 
+    print("Parsed {0} spectra from file {1}".format(len(stats.keys()), mzml_file))
     print()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(main.__doc__)
         exit()

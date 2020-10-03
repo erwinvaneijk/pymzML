@@ -5,17 +5,15 @@ Interface for mzML files
 
 @author: Manuel Koesters
 """
-from __future__ import print_function
-from pymzml.file_classes import indexedGzip
-from pymzml.file_classes import standardGzip
-from pymzml.file_classes import standardMzml
+from io import BytesIO
+from pymzml.file_classes import indexedGzip, standardGzip, standardMzml, bytesMzml
 from pymzml.utils import GSGR
 
 
 class FileInterface(object):
     """Interface to different mzML formats."""
 
-    def __init__(self, path, encoding):
+    def __init__(self, path, encoding, build_index_from_scratch=False, index_regex=None):
         """
         Initialize a object interface to mzML files.
 
@@ -24,15 +22,17 @@ class FileInterface(object):
             encoding (str)           : encoding of the file
 
         """
-        self.encoding     = encoding
+        self.build_index_from_scratch = build_index_from_scratch
+        self.encoding = encoding
+        self.index_regex = index_regex
         self.file_handler = self._open(path)
-        self.offset_dict  = self.file_handler.offset_dict
+        self.offset_dict = self.file_handler.offset_dict
 
     def close(self):
         """Close the internal file handler."""
         self.file_handler.close()
 
-    def _open(self, path):
+    def _open(self, path_or_file):
         """
         Open a file like object resp. a wrapper for a file like object.
 
@@ -46,23 +46,18 @@ class FileInterface(object):
             :py:class:`~pymzml.file_classes.standardMzml.StandardMzml`,
             based on the file ending of 'path'
         """
-        if path.endswith('.gz'):
-            if self._indexed_gzip(path):
-                file_handler = indexedGzip.IndexedGzip(
-                    path,
-                    self.encoding
-                )
-            else:
-                file_handler = standardGzip.StandardGzip(
-                    path,
-                    self.encoding
-                )
-        else:
-            file_handler = standardMzml.StandardMzml(
-                path,
-                self.encoding
+        if isinstance(path_or_file, BytesIO):
+            return bytesMzml.BytesMzml(
+                path_or_file, self.encoding, self.build_index_from_scratch
             )
-        return file_handler
+        if path_or_file.endswith(".gz"):
+            if self._indexed_gzip(path_or_file):
+                return indexedGzip.IndexedGzip(path_or_file, self.encoding)
+            else:
+                return standardGzip.StandardGzip(path_or_file, self.encoding)
+        return standardMzml.StandardMzml(
+            path_or_file, self.encoding, self.build_index_from_scratch, index_regex=self.index_regex
+        )
 
     def _indexed_gzip(self, path):
         """
@@ -105,5 +100,6 @@ class FileInterface(object):
         #     self.offset_dict.update(self.file_handler.offset_dict)
         return self.file_handler[identifier]
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     print(__doc__)
